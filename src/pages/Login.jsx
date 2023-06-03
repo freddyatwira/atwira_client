@@ -1,7 +1,17 @@
 import { useState } from "react";
-import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { reset, loginUser } from "../redux/auth/authSlice";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const { isError, isSuccess, message, isLoading } = useSelector(
+    (state) => state.auth
+  );
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -9,17 +19,10 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(
-        `https://atwira-server1.onrender.com/auth/login`,
-        inputs
-      );
 
-      console.log(response.data);
-      setInputs(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(loginUser(inputs));
+
+    navigate("/");
   };
 
   const handleChange = (e) => {
@@ -28,6 +31,24 @@ const Login = () => {
       [e.target.name]: e.target.value,
     }));
   };
+
+  useEffect(() => {
+    if (isError) {
+      message;
+    }
+    if (isSuccess) {
+      navigate("/");
+    }
+  }, [navigate, isError, message, isSuccess, dispatch]);
+
+  if (isLoading)
+    return (
+      <div className="mx-auto w-[90%] text-white z-40">
+        <span>
+          <li className="fa fa-refresh text-4xl text-[green]"></li>
+        </span>
+      </div>
+    );
 
   return (
     <div className="mx-auto w-[90%] justify-around mt-20 ">
@@ -49,6 +70,7 @@ const Login = () => {
             onChange={handleChange}
             type="email"
             id="email"
+            name="email"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
             placeholder="Enter email . . . "
             required
@@ -64,6 +86,7 @@ const Login = () => {
             onChange={handleChange}
             type="password"
             id="password"
+            name="password"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
             placeholder="•••••••••"
             required
@@ -78,6 +101,7 @@ const Login = () => {
           </div>
 
           <div className="">
+            {message && <p className="w-full ml-16 my-2">{message}</p>}
             <p className="w-full ml-16 my-2">Forgotten password</p>
             <p className="w-full ml-16 mb-6">New member ? Sign up</p>
           </div>
