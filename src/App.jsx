@@ -4,6 +4,8 @@ import ErrorPage from "./pages/ErrorPage";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Dashboard = () => {
   return (
@@ -42,8 +44,9 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <div className="">
+    <div className="bg-gradient-to-b from-transparent via-fuchsia-200 to-teal-200 h-[720px]">
       <RouterProvider router={router} />
+      <ToastContainer />
     </div>
   );
 }

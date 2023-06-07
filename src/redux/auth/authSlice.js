@@ -10,6 +10,7 @@ export const loginUser = createAsyncThunk(
         "https://atwira-server1.onrender.com/auth/login",
         inputs
       );
+
       if (response.data) {
         localStorage.setItem("user", JSON.stringify(response.data));
       }
@@ -56,14 +57,14 @@ const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        (state.isLoading = false),
-          (state.user = action.payload),
-          (state.isSuccess = true);
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload;
       })
       .addCase(loginUser.rejected, (state, action) => {
-        (state.user = null),
-          (state.isError = true),
-          (state.message = action.payload);
+        state.isError = true;
+        state.message = action.payload;
+        state.user = null;
       });
   },
 });
