@@ -40,10 +40,6 @@ const Login = () => {
     dispatch(reset());
   }, [isError, user, message, isSuccess, navigate, dispatch]);
 
-  // if (isLoading) {
-  //   return <BarLoader color="#36d7b7" />;
-  // }
-
   return (
     <div className="mx-auto w-[90%] justify-around mt-20 ">
       <div className="bg-black h-16 w-full md:w-[50%] text-white mx-auto rounded-t-lg">

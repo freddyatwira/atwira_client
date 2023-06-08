@@ -4,9 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/auth/authSlice";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+
   const { user } = useSelector((state) => state.auth);
 
-  const dispatch = useDispatch();
+  const username = user?.name;
 
   const [nav, setNav] = useState(false);
 
@@ -21,14 +23,6 @@ const Navbar = () => {
           <Link to="/">
             ATWIRA <span className="text-[white]">Tech.</span>
           </Link>
-
-          {/*{user && (
-            <span className="mr-2 hover:text-[#43e643] hover:mx-1 cursor-pointer">
-              {user.name}
-            </span>
-          )}
-
-          {user && <button onClick={() => dispatch(logout())}>logout</button>} */}
         </h1>
 
         {/* nav for large display */}
@@ -54,20 +48,17 @@ const Navbar = () => {
               Contact
             </li>
 
-            {!user ? (
-              <button className="bg-white font-semibold mr-2 text-black border border-gray-400 rounded shadow cursor-pointer">
-                <Link to="/login">Login</Link>
-              </button>
-            ) : (
-              <div>
-                <span className=" font-bold ">{user.name}</span>
-                <button
-                  onClick={dispatch(logout())}
-                  className="bg-white font-semibold mr-2 text-black border border-gray-400 rounded shadow cursor-pointer"
-                >
-                  logout
-                </button>
+            {user ? (
+              <div className="block md:flex justify-between">
+                <span className="text-1xl font-semibold border rounded-sm mr-2">
+                  {username}
+                </span>
+                <button onClick={() => dispatch(logout())}>logout</button>
               </div>
+            ) : (
+              <button className="bg-white rounded-sm text-black">
+                <Link to="/login">login</Link>
+              </button>
             )}
           </ul>
         </div>
@@ -90,7 +81,7 @@ const Navbar = () => {
             : "fixed left-[-100%] ease-in-out"
         }
       >
-        <ul className=" ml-16 ">
+        <ul className=" ml-16  z-50">
           <li className="mb-3 hover:text-[#43e643] hover:mx-1 cursor-pointer">
             Home
           </li>
@@ -109,15 +100,19 @@ const Navbar = () => {
           <li className="my-3 hover:text-[#43e643] hover:mx-1 cursor-pointer">
             Contact
           </li>
-          <li className="pb-6 flex">
-            {user && (
-              <span className="mr-2 font-bold hover:text-[#3ecfe2] hover:mx-1 cursor-pointer border">
-                {user.name}
-              </span>
-            )}
 
-            {user && <button onClick={() => dispatch(logout())}>logout</button>}
-          </li>
+          {user ? (
+            <div className="block md:flex justify-between pb-5">
+              <span className="text-1xl font-semibold border rounded-sm mr-2">
+                {username}
+              </span>
+              <button onClick={() => dispatch(logout())}>logout</button>
+            </div>
+          ) : (
+            <button className="bg-white rounded-sm text-black">
+              <Link to="/login">login</Link>
+            </button>
+          )}
         </ul>
       </div>
       {/*end of mobile nav */}

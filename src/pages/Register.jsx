@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 
 const Register = () => {
+  const [error, setError] = useState(" ");
+
   const [inputs, setInputs] = useState({
     name: "",
     email: "",
@@ -11,15 +13,13 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
+      await axios.post(
         `https://atwira-server1.onrender.com/auth/register`,
         inputs
       );
-
-      console.log(response.data);
-      setInputs(response.data);
+      setInputs("");
     } catch (error) {
-      console.log(error);
+      setError(error);
     }
   };
 
@@ -46,13 +46,15 @@ const Register = () => {
           >
             Name
           </label>
+
+          {error && <p className="text-[red]">{error}</p>}
           <input
             onChange={handleChange}
             type="text"
             id="name"
             name="name"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-            placeholder="Enter email . . . "
+            placeholder="Enter name . . . "
             required
           />
           <label

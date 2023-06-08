@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const user = JSON.parse(localStorage.getItem("user") || null);
+
 export const loginUser = createAsyncThunk(
   "users/login",
   async (inputs, thunkAPI) => {
@@ -14,10 +15,8 @@ export const loginUser = createAsyncThunk(
       if (response.data) {
         localStorage.setItem("user", JSON.stringify(response.data));
       }
-      console.log(response.data);
       return response.data;
     } catch (error) {
-      console.log(error);
       const message =
         (error.response &&
           error.response.data &&
