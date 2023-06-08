@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import image1 from "../assets/cover.jpg";
 import image2 from "../assets/webapp.jpg";
 import image3 from "../assets/mobapp.jpg";
+import Footer from "../components/Footer";
 
 const Home = () => {
   const { user } = useSelector((state) => state.auth);
@@ -9,8 +10,9 @@ const Home = () => {
   const username = user?.name;
 
   return (
-    <div className="mt-16 z-0">
-      <div className="bg-gradient-to-b from-black h-[480px]">
+    <div className="mt-16">
+      <div className="bg-gradient-to-b from-black h-[480px]"></div>
+      <div className=" z-10 mt-[-480px]">
         <h1 className="text-5xl text-[#42f142] font-bold p-6  hover:px-7">
           WE DEVELOP WEB & MOBILE APP
         </h1>

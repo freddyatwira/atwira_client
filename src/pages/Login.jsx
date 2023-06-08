@@ -41,7 +41,7 @@ const Login = () => {
   }, [isError, user, message, isSuccess, navigate, dispatch]);
 
   return (
-    <div className="mx-auto w-[90%] justify-around mt-20 ">
+    <div className="mx-auto w-[90%] h-screen mt-16">
       <div className="bg-black h-16 w-full md:w-[50%] text-white mx-auto rounded-t-lg">
         <h1 className="flex justify-around text-3xl pt-3 text-[#43e643] font-serif font-bold">
           LOGIN FORM

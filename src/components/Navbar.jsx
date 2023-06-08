@@ -35,17 +35,17 @@ const Navbar = () => {
         >
           <ul className="flex text-[#fbfcfb] m-2">
             <li className="mr-2 hover:text-[#43e643] hover:mx-1 cursor-pointer">
-              Home
+              <Link to="/home">Home</Link>
             </li>
 
             <li className="mr-2 hover:text-[#43e643] hover:mx-1 cursor-pointer">
-              About_us
+              <Link to="/about">About_us</Link>
             </li>
             <li className="mr-2 hover:text-[#43e643] hover:mx-1 cursor-pointer">
-              Gallery
+              <Link to="/gallery">Gallery</Link>
             </li>
             <li className="mr-2 hover:text-[#43e643] hover:mx-1 cursor-pointer">
-              Contact
+              <Link to="/contact_us">Contact</Link>
             </li>
 
             {user ? (
@@ -56,7 +56,7 @@ const Navbar = () => {
                 <button onClick={() => dispatch(logout())}>logout</button>
               </div>
             ) : (
-              <button className="bg-white rounded-sm text-black">
+              <button className="bg-white rounded-sm text-black px-2">
                 <Link to="/login">login</Link>
               </button>
             )}
@@ -83,22 +83,22 @@ const Navbar = () => {
       >
         <ul className=" ml-16  z-50">
           <li className="mb-3 hover:text-[#43e643] hover:mx-1 cursor-pointer">
-            Home
+            <Link to="/home">Home</Link>
           </li>
 
           <hr className="w-[70%] text-slate-500 " />
 
           <li className="my-3 hover:text-[#43e643] hover:mx-1 cursor-pointer">
-            About_us
+            <Link to="/about">About_us</Link>
           </li>
           <hr className="w-[70%]  text-slate-500 " />
           <li className="my-3 hover:text-[#43e643] hover:mx-1 cursor-pointer">
-            Gallery
+            <Link to="/gallery">Gallery</Link>
           </li>
           <hr className="w-[70%] text-slate-500 " />
 
           <li className="my-3 hover:text-[#43e643] hover:mx-1 cursor-pointer">
-            Contact
+            <Link to="/contact_us">Contact</Link>
           </li>
 
           {user ? (
@@ -109,9 +109,11 @@ const Navbar = () => {
               <button onClick={() => dispatch(logout())}>logout</button>
             </div>
           ) : (
-            <button className="bg-white rounded-sm text-black">
-              <Link to="/login">login</Link>
-            </button>
+            <div className="pb-6">
+              <button className="bg-white rounded-sm text-black px-2">
+                <Link to="/login">login</Link>
+              </button>
+            </div>
           )}
         </ul>
       </div>
